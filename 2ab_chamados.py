@@ -16,10 +16,10 @@ with open('usuario_logado.json', 'r') as f:
 def conectar_banco():
     try:
         return psycopg2.connect(
-            dbname='tgbrsuporte',
-            user='master',
-            password='!@#master2024',
-            host='192.168.50.27'
+            dbname='',
+            user='',
+            password='',
+            host=''
         )
     except Exception as e:
         messagebox.showerror("Erro de Conexão", f"Erro ao conectar ao banco de dados: {e}")
