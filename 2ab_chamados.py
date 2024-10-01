@@ -6,8 +6,8 @@ from datetime import datetime
 import json
 
 # Adicione seu token e ID de chat do Telegram
-telegram_token = "7097976606:AAF8hSOrN5Jk58wMwPHjAkpE8wdtQraGRic"
-telegram_chat_id = "7054943943"
+telegram_token = "yourtelegramtoken"
+telegram_chat_id = "yourtelegramchatid"
 
 # Carregar o usuário logado de um arquivo JSON
 with open('usuario_logado.json', 'r') as f:
@@ -129,10 +129,10 @@ def enviar_chamado():
     usuario_nome = obter_nome_usuario(usuario_id)
     message = f"Novo chamado recebido!\nUsuário: {usuario_nome}\nTipo: {tipo_chamado}\nAssunto: {assunto}\nDescrição: {descricao}\nPrioridade: {prioridade}\nLocalidade: {localidade}"
 
-    # Enviar notificação via Telegram
+    # NOTIFICAÇÃO TELEGRAM
     try:
         response = requests.get(
-            f"https://api.telegram.org/bot7097976606:AAF8hSOrN5Jk58wMwPHjAkpE8wdtQraGRic/sendMessage",
+            f"https://api.telegram.org/botcodigodobot:codigotoken/sendMessage",
             params={"chat_id": telegram_chat_id, "text": message}
         )
         if response.status_code != 200:
@@ -207,13 +207,12 @@ def limpar_campos():
     localidade_var.set('')
     enviar_button.config(state=tk.NORMAL)
 
-# Modificação das cores de fundo e texto
+#INTERFACE
 dark_bg = "#243837"
 light_bg = "#3e3e3e"
 text_color = "#FE7833"
 highlight_color = "#463746"
 
-# Janela de abertura de chamados
 root = tk.Tk()
 root.title("TEC HELP: Abertura de Chamados")
 root.geometry('700x700')
