@@ -2,25 +2,22 @@ import tkinter as tk
 from tkinter import messagebox
 import psycopg2
 
-# Conexão com o banco de dados
 def conectar_banco():
     try:
         return psycopg2.connect(
-            dbname='tgbrsuporte',
-            user='master',  # Substitua com seu usuário real
-            password='!@#master2024',  # Substitua com sua senha real
-            host='192.168.50.27'
+            dbname='',
+            user='',  
+            password='',  
+            host=''
         )
     except Exception as e:
         messagebox.showerror("Erro de Conexão", f"Erro ao conectar ao banco de dados: {e}")
         return None
 
-# Função para limpar o frame interativo
 def limpar_interactive_frame():
     for widget in interactive_frame.winfo_children():
         widget.destroy()
 
-# Funções relacionadas a usuários
 def criar_usuario():
     limpar_interactive_frame()
     tk.Label(interactive_frame, text="Nome do usuário:").pack()
@@ -40,11 +37,11 @@ def criar_usuario():
     entry_senha_usuario.pack()
     
     tk.Label(interactive_frame, text="Tipo de usuário:").pack()
-    role_var = tk.StringVar(value="user")  # Valor padrão é "user"
+    role_var = tk.StringVar(value="user") 
     tk.Radiobutton(interactive_frame, text="Usuário", variable=role_var, value="user").pack(anchor=tk.W)
     tk.Radiobutton(interactive_frame, text="Administrador", variable=role_var, value="admin").pack(anchor=tk.W)
 
-    # Passe o argumento role na chamada da função
+    #PASSAR ARGUMENTO 'ROLE' NA CHAMADA DA FUNÇÃO
     btn_salvar_usuario = tk.Button(interactive_frame, text="Salvar", command=lambda: salvar_usuario(
         entry_nome_usuario.get(), entry_email_usuario.get(), entry_senha_usuario.get(), role_var.get(), entry_ip_usuario.get()
     ))
@@ -216,7 +213,7 @@ def salvar_assunto(categoria, nome, prioridade, descricao):
             cur.close()
             conn.close()
 
-# Inicialização da GUI
+#INTERFACE
 root = tk.Tk()
 root.title("Tela de Configurações - Admin-only")
 root.geometry('800x600')
@@ -231,12 +228,11 @@ dark_bg = "#243837"
 light_bg = "#3e3e3e"
 text_color = "#FE7833"
 highlight_color = "#463746"
-
+#ADICIONAR BOTÕES AQUI
 buttons = {
     "Criar Usuário + Senha": criar_usuario,
     "Lista de Usuários": lista_usuarios,
     "Listar Chamados": listar_chamados,
-    # Adicione mais botões conforme necessário
 }
 
 for text, command in buttons.items():
