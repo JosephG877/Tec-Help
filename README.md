@@ -7,3 +7,11 @@ A metodologia deste programa é bastante simples (simplório, eu diria), de form
 Recomendamos o uso da versão 3.12.4 do Python para ambientes 64-bits e a versão 3.8.6 para ambientes 32-bits. O Python deve ser instalado em todas as máquinas cliente.
 
 Instale os seguintes bibliotecas via pip: psycopg2, datetime, image, pandas, requests.
+
+TEC HELP is a system designed to help IT support professionals manage their tickets in a simple and straightforward way, without paying absurd amounts for a bloated ticketing system or having to deal with a high volume of tickets in a disorganized way, thus being able to generate concise reports on the team's productivity.
+The methodology of this program is quite simple (simplistic, I would say), so the technician will copy the source code to a computer that will serve as a server, allowing access by client machines via folder sharing (SMB) and then create a shortcut to access the code “1login.py”, which will be accessed directly by the user. The entire access hierarchy is based on login. There are standard users and administrators. The standard user accesses the ticket opening area directly. The administrator accesses the technical support area directly. A PostgreSQL database must be created on any machine that supports concurrent access by many users, depending on each context. The credentials for accessing the database are located directly in “1login.py”, hard-coded into the source code (I said the system was simple, feel free to improve it). In the “criabanco.py” file, you can access which tables will be created. Remember to install PostgreSQL on your server before running the script.
+
+We recommend using Python version 3.12.4 for 64-bit environments and version 3.8.6 for 32-bit environments. Python must be installed on all client machines.
+
+Install the following libraries via pip: psycopg2, datetime, image, pandas, requests.
+
