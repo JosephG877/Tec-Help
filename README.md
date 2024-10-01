@@ -1,2 +1,9 @@
 # Tec-Help
-Tec Help - Sistema Simples para Gerenciamento de Tickets/ Simple program for tech support ticket management
+Tec Help - Sistema Simples para Gerenciamento de Tickets de Chamados/ Simple Program for Tech Support Ticket Management
+
+O TEC HELP é um sistema desenvolvido com o propósito de ajudar profissionais de suporte em TI a gerenciarem seus chamados de forma simples e direta, sem pagar absurdos por um sistema de ticket bloatado, nem ter que lidar com um alto volume de chamados de forma desorganizada, podendo assim gerar relatórios concisos a respeito da produtividade da equipe.
+A metodologia deste programa é bastante simples (simplório, eu diria), de forma que o técnico irá copiar os códigos-fonte para um computador que servirá como servidor, admitindo acesso pelas máquinas-cliente via compartilhamento de pasta (SMB) e em seguida, criar um atalho de acesso ao código "1login.py", que será acessado diretamente pelo usuário. Toda a hierarquia de acessos é baseada em login. Há os usuários comuns e os administradores. O usuário padrão acessa diretamente a área de abertura de chamados. O administrador acessa diretamente a área de suporte técnico. Deve ser criado um banco de dados PostgreSQL, em qualquer máquina que tenha suporte para o acesso concomitante de muitos usuários, a depender de cada contexto. As credenciais de acesso ao banco de dados estão localizadas direto em "1login.py", hard-codadas no código fonte (disse que o sistema era simplório, sinta-se à vontade para melhorá-lo). No arquivo "criabanco.py", você poderá acessar quais tabelas serão criadas, lembre-se de instalar o PostgreSQL no seu servidor antes de rodar o script.
+
+Recomendamos o uso da versão 3.12.4 do Python para ambientes 64-bits e a versão 3.8.6 para ambientes 32-bits. O Python deve ser instalado em todas as máquinas cliente.
+
+Instale os seguintes bibliotecas via pip: psycopg2, datetime, image, pandas, requests.
