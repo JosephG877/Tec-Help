@@ -5,11 +5,11 @@ import psycopg2
 from datetime import datetime
 import json
 
-# Adicione seu token e ID de chat do Telegram
+#ADICIONE SEU TOKEN DO TELEGRAM AQUI E O ID DO CHAT
 telegram_token = "yourtelegramtoken"
 telegram_chat_id = "yourtelegramchatid"
 
-# Carregar o usuário logado de um arquivo JSON
+#CARREGAR USUÁRIO CARREGADO DO JSON
 with open('usuario_logado.json', 'r') as f:
     usuario_logado = json.load(f)
 
@@ -129,7 +129,7 @@ def enviar_chamado():
     usuario_nome = obter_nome_usuario(usuario_id)
     message = f"Novo chamado recebido!\nUsuário: {usuario_nome}\nTipo: {tipo_chamado}\nAssunto: {assunto}\nDescrição: {descricao}\nPrioridade: {prioridade}\nLocalidade: {localidade}"
 
-    # NOTIFICAÇÃO TELEGRAM
+    #NOTIFICAÇÃO TELEGRAM
     try:
         response = requests.get(
             f"https://api.telegram.org/botcodigodobot:codigotoken/sendMessage",
@@ -140,7 +140,7 @@ def enviar_chamado():
     except Exception as e:
         messagebox.showerror("Erro", f"Erro ao enviar notificação: {str(e)}")
 
-    # Registrar chamado no banco de dados
+    #REGISTRAR CHAMADO NO BANCO
     if conn:
         cur = conn.cursor()
         try:
