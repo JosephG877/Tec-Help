@@ -4,35 +4,29 @@ from tkinter import messagebox, Tk
 
 def create_database():
     try:
-        # Conectar ao PostgreSQL para criar o banco de dados
         conn = psycopg2.connect(
             dbname='postgres',
             user='seu_usuario',
             password='sua_senha',
             host='localhost'
         )
-        conn.autocommit = True  # Permite criar o banco de dados
+        conn.autocommit = True 
         cursor = conn.cursor()
 
-        # Nome do banco de dados para o sistema TEC HELP
         db_name = 'tec_help_db'
 
-        # Verifica se o banco de dados já existe
         cursor.execute(f"SELECT 1 FROM pg_database WHERE datname = '{db_name}';")
         exists = cursor.fetchone()
 
         if not exists:
-            # Criar o banco de dados
             cursor.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(db_name)))
             print(f"Banco de dados '{db_name}' criado com sucesso.")
         else:
             print(f"O banco de dados '{db_name}' já existe.")
 
-        # Fechar a conexão com o banco de dados padrão
         cursor.close()
         conn.close()
 
-        # Conectar ao novo banco de dados
         conn = psycopg2.connect(
             dbname=db_name,
             user='seu_usuario',
@@ -41,7 +35,6 @@ def create_database():
         )
         cursor = conn.cursor()
 
-        # Criação das tabelas necessárias para o sistema TEC HELP
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS usuarios (
             id SERIAL PRIMARY KEY,
@@ -116,13 +109,11 @@ def create_database():
         );
         ''')
 
-        # Confirmar as mudanças
         conn.commit()
 
         print("Tabelas criadas com sucesso.")
-        messagebox.showinfo("Sucesso", "Banco de dados e tabelas criados com sucesso!")
+        messagebox.showinfo("Sucesso", "Banco de dados e tabelas criadas com sucesso!!")
 
-        # Fechar a conexão
         cursor.close()
         conn.close()
 
@@ -132,8 +123,8 @@ def create_database():
 
 def iniciar_instalacao():
     root = Tk()
-    root.withdraw()  # Oculta a janela principal
-    resposta = messagebox.askyesno("Instalador", "Deseja criar o banco de dados e suas tabelas?")
+    root.withdraw()  
+    resposta = messagebox.askyesno("WIZARD", "Deseja criar o banco de dados?")
     
     if resposta:
         create_database()
