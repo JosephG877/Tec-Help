@@ -7,16 +7,16 @@ import psycopg2
 import json
 from PIL import Image, ImageTk
 
-# Variável global para armazenar o usuário logado
+# VARIÁVEL GLOBAL PARA ARMAZENAR USER LOGADO
 usuario_logado = {}
 
 def conectar_banco():
     try:
         return psycopg2.connect(
-            dbname='tgbrsuporte',
-            user='master',
-            password='!@#master2024',
-            host='192.168.50.27'
+            dbname='yourdatabasename',
+            user='youruser',
+            password='yourpassword',
+            host='yourdatabaseipv4'
         )
     except Exception as e:
         messagebox.showerror("Erro de Conexão", f"Erro ao conectar ao banco de dados: {e}")
@@ -32,7 +32,7 @@ def validar_login(nome_usuario, senha):
             if user:
                 global usuario_logado
                 usuario_logado = {"id": user[0], "role": user[1]}
-                # Salvar o usuário logado em um arquivo JSON
+                # SALVAR USER LOGADO NO ARQUIVO JSON
                 with open(resource_path('usuario_logado.json'), 'w') as f:
                     json.dump(usuario_logado, f)
                 messagebox.showinfo("Login bem-sucedido", f"Bem-vindo, {nome_usuario}!")
@@ -63,12 +63,11 @@ def abrir_tela_usuario():
     subprocess.Popen([sys.executable, resource_path('2ab_chamados.py')])
     root.quit()
 
-# Interface de login
+#INTERFACE
 root = tk.Tk()
 root.title("TEC HELP :: LOGIN")
 root.geometry('800x600')
 
-# Definir estilo de tema escuro
 dark_bg = "#243837"
 light_bg = "#3e3e3e"
 text_color = "#FE7833"
@@ -76,24 +75,21 @@ highlight_color = "#463746"
 
 root.configure(bg=dark_bg)
 
-# Adicionar espaço para logo
 logo_frame = tk.Frame(root, bg=dark_bg, height=150)
 logo_frame.pack(fill=tk.X)
 
-# Carregar a imagem da logo
 try:
     logo_path = resource_path("techelplogo.jpg")
-    print(f"Logo path: {logo_path}")  # Depurar caminho da logo
+    print(f"Logo path: {logo_path}")  
     logo_image = Image.open(logo_path)
     logo_image = logo_image.resize((400, 200), Image.Resampling.LANCZOS)
     logo_photo = ImageTk.PhotoImage(logo_image)
     logo_label = tk.Label(logo_frame, image=logo_photo, bg=dark_bg)
-    logo_label.image = logo_photo  # Manter uma referência para evitar que a imagem seja coletada pelo garbage collector
+    logo_label.image = logo_photo  
     logo_label.pack(pady=10)
 except Exception as e:
     messagebox.showerror("Erro", f"Erro ao carregar a imagem da logo: {e}")
 
-# Espaço para os campos de login
 login_frame = tk.Frame(root, bg=dark_bg)
 login_frame.pack(expand=True)
 
